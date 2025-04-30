@@ -139,7 +139,7 @@ function formatOrder(order: ShopifyOrderGraphql): string {
 
 // Products Tools
 server.tool(
-  "get-products",
+  "findProducts",
   "Get all products or search by title",
   {
     searchTitle: z
@@ -150,7 +150,7 @@ server.tool(
   },
   async (args) => {
     console.error(
-      `[MCP Server] Received call: get-products with args: ${JSON.stringify(args)}`
+      `[MCP Server] Received call: findProducts with args: ${JSON.stringify(args)}`
     );
     const { searchTitle, limit } = args;
     const client = new ShopifyClient();
@@ -172,7 +172,7 @@ server.tool(
 );
 
 server.tool(
-  "get-products-by-collection",
+  "listProductsInCollection",
   "Get products from a specific collection",
   {
     collectionId: z
@@ -186,7 +186,7 @@ server.tool(
   },
   async (args) => {
     console.error(
-      `[MCP Server] Received call: get-products-by-collection with args: ${JSON.stringify(args)}`
+      `[MCP Server] Received call: listProductsInCollection with args: ${JSON.stringify(args)}`
     );
     const { collectionId, limit } = args;
     const client = new ShopifyClient();
@@ -208,7 +208,7 @@ server.tool(
 );
 
 server.tool(
-  "get-products-by-ids",
+  "getProductsByIds",
   "Get products by their IDs",
   {
     productIds: z
@@ -217,7 +217,7 @@ server.tool(
   },
   async (args) => {
     console.error(
-      `[MCP Server] Received call: get-products-by-ids with args: ${JSON.stringify(args)}`
+      `[MCP Server] Received call: getProductsByIds with args: ${JSON.stringify(args)}`
     );
     const { productIds } = args;
     const client = new ShopifyClient();
@@ -238,7 +238,7 @@ server.tool(
 );
 
 server.tool(
-  "get-variants-by-ids",
+  "getVariantsByIds",
   "Get product variants by their IDs",
   {
     variantIds: z
@@ -247,7 +247,7 @@ server.tool(
   },
   async (args) => {
     console.error(
-      `[MCP Server] Received call: get-variants-by-ids with args: ${JSON.stringify(args)}`
+      `[MCP Server] Received call: getVariantsByIds with args: ${JSON.stringify(args)}`
     );
     const { variantIds } = args;
     const client = new ShopifyClient();
@@ -268,7 +268,7 @@ server.tool(
 
 // Customer Tools
 server.tool(
-  "get-customers",
+  "listCustomers",
   "Get shopify customers with pagination support",
   {
     limit: z.number().optional().describe("Limit of customers to return"),
@@ -276,7 +276,7 @@ server.tool(
   },
   async (args) => {
     console.error(
-      `[MCP Server] Received call: get-customers with args: ${JSON.stringify(args)}`
+      `[MCP Server] Received call: listCustomers with args: ${JSON.stringify(args)}`
     );
     const { limit, next } = args;
     const client = new ShopifyClient();
@@ -297,7 +297,7 @@ server.tool(
 );
 
 server.tool(
-  "tag-customer",
+  "addCustomerTags",
   "Add tags to a customer",
   {
     customerId: z.string().describe("Customer ID to tag"),
@@ -305,7 +305,7 @@ server.tool(
   },
   async (args) => {
     console.error(
-      `[MCP Server] Received call: tag-customer with args: ${JSON.stringify(args)}`
+      `[MCP Server] Received call: addCustomerTags with args: ${JSON.stringify(args)}`
     );
     const { customerId, tags } = args;
     const client = new ShopifyClient();
@@ -334,7 +334,7 @@ server.tool(
 
 // Order Tools
 server.tool(
-  "get-orders",
+  "findOrders",
   "Get shopify orders with advanced filtering and sorting",
   {
     first: z.number().optional().describe("Limit of orders to return"),
@@ -355,7 +355,7 @@ server.tool(
   },
   async (args) => {
     console.error(
-      `[MCP Server] Received call: get-orders with args: ${JSON.stringify(args)}`
+      `[MCP Server] Received call: findOrders with args: ${JSON.stringify(args)}`
     );
     const { first, after, query, sortKey, reverse } = args;
     const client = new ShopifyClient();
@@ -383,14 +383,14 @@ server.tool(
 );
 
 server.tool(
-  "get-order",
+  "getOrderById",
   "Get a single order by ID",
   {
     orderId: z.string().describe("ID of the order to retrieve"),
   },
   async (args) => {
     console.error(
-      `[MCP Server] Received call: get-order with args: ${JSON.stringify(args)}`
+      `[MCP Server] Received call: getOrderById with args: ${JSON.stringify(args)}`
     );
     const { orderId } = args;
     const client = new ShopifyClient();
@@ -412,7 +412,7 @@ server.tool(
 
 // Discount Tools
 server.tool(
-  "create-discount",
+  "createDiscountCode",
   "Create a basic discount code",
   {
     title: z.string().describe("Title of the discount"),
@@ -431,7 +431,7 @@ server.tool(
   },
   async (args) => {
     console.error(
-      `[MCP Server] Received call: create-discount with args: ${JSON.stringify(args)}`
+      `[MCP Server] Received call: createDiscountCode with args: ${JSON.stringify(args)}`
     );
     const {
       title,
@@ -476,7 +476,7 @@ server.tool(
 
 // Draft Order Tools
 server.tool(
-  "create-draft-order",
+  "createDraftOrder",
   "Create a draft order",
   {
     lineItems: z
@@ -504,7 +504,7 @@ server.tool(
   },
   async (args) => {
     console.error(
-      `[MCP Server] Received call: create-draft-order with args: ${JSON.stringify(args)}`
+      `[MCP Server] Received call: createDraftOrder with args: ${JSON.stringify(args)}`
     );
     const { lineItems, email, shippingAddress, note } = args;
     const client = new ShopifyClient();
@@ -532,7 +532,7 @@ server.tool(
 );
 
 server.tool(
-  "complete-draft-order",
+  "completeDraftOrder",
   "Complete a draft order",
   {
     draftOrderId: z.string().describe("ID of the draft order to complete"),
@@ -540,7 +540,7 @@ server.tool(
   },
   async (args) => {
     console.error(
-      `[MCP Server] Received call: complete-draft-order with args: ${JSON.stringify(args)}`
+      `[MCP Server] Received call: completeDraftOrder with args: ${JSON.stringify(args)}`
     );
     const { draftOrderId, variantId } = args;
     const client = new ShopifyClient();
@@ -564,7 +564,7 @@ server.tool(
 
 // Collection Tools
 server.tool(
-  "get-collections",
+  "listCollections",
   "Get all collections",
   {
     limit: z
@@ -576,7 +576,7 @@ server.tool(
   },
   async (args) => {
     console.error(
-      `[MCP Server] Received call: get-collections with args: ${JSON.stringify(args)}`
+      `[MCP Server] Received call: listCollections with args: ${JSON.stringify(args)}`
     );
     const { limit, name } = args;
     const client = new ShopifyClient();
@@ -596,9 +596,9 @@ server.tool(
 );
 
 // Shop Tools
-server.tool("get-shop", "Get shop details", {}, async (args) => {
+server.tool("getShopDetails", "Get shop details", {}, async (args) => {
   console.error(
-    `[MCP Server] Received call: get-shop with args: ${JSON.stringify(args)}`
+    `[MCP Server] Received call: getShopDetails with args: ${JSON.stringify(args)}`
   );
   const client = new ShopifyClient();
   try {
@@ -612,12 +612,12 @@ server.tool("get-shop", "Get shop details", {}, async (args) => {
 });
 
 server.tool(
-  "get-shop-details",
+  "getExtendedShopDetails",
   "Get extended shop details including shipping countries",
   {},
   async (args) => {
     console.error(
-      `[MCP Server] Received call: get-shop-details with args: ${JSON.stringify(args)}`
+      `[MCP Server] Received call: getExtendedShopDetails with args: ${JSON.stringify(args)}`
     );
     const client = new ShopifyClient();
     try {
@@ -636,7 +636,7 @@ server.tool(
 
 // Webhook Tools
 server.tool(
-  "manage-webhook",
+  "manageWebhooks",
   "Subscribe, find, or unsubscribe webhooks",
   {
     action: z
@@ -653,7 +653,7 @@ server.tool(
   },
   async (args) => {
     console.error(
-      `[MCP Server] Received call: manage-webhook with args: ${JSON.stringify(args)}`
+      `[MCP Server] Received call: manageWebhooks with args: ${JSON.stringify(args)}`
     );
     const { action, callbackUrl, topic, webhookId } = args;
     const client = new ShopifyClient();
@@ -705,7 +705,7 @@ server.tool(
 
 // Tool to check if the size-chart is present in the variant
 server.tool(
-  "debug-get-variant-metafield",
+  "debugGetVariantMetafield",
   "DEBUG: Get a specific variant and its size_chart_json metafield.",
   {
     variantId: z
@@ -714,7 +714,7 @@ server.tool(
   },
   async (args) => {
     console.error(
-      `[MCP Server] Received call: debug-get-variant-metafield with args: ${JSON.stringify(args)}`
+      `[MCP Server] Received call: debugGetVariantMetafield with args: ${JSON.stringify(args)}`
     );
     const { variantId } = args;
     const client = new ShopifyClient();
