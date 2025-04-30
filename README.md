@@ -54,48 +54,48 @@ npm run build
 
 ### Product Management
 
-1.  `get-products`: Get all products or search by title.
+1.  `findProducts`: Get all products or search by title.
     *   `searchTitle` (optional string): Filter by title.
     *   `limit` (number): Max products.
-2.  `get-products-by-collection`: Get products from a collection.
+2.  `listProductsInCollection`: Get products from a collection.
     *   `collectionId` (string): Collection ID.
     *   `limit` (optional number, default: 10): Max products.
-3.  `get-products-by-ids`: Get products by IDs.
+3.  `getProductsByIds`: Get products by IDs.
     *   `productIds` (array of strings): Product IDs.
-4.  `get-variants-by-ids`: Get variants by IDs.
+4.  `getVariantsByIds`: Get variants by IDs.
     *   `variantIds` (array of strings): Variant IDs.
 
 ### Customer Management
 
-5.  `get-customers`: Get customers with pagination.
+5.  `listCustomers`: Get customers with pagination.
     *   `limit` (optional number): Max customers.
     *   `next` (optional string): Next page cursor.
-6.  `tag-customer`: Add tags to a customer.
+6.  `addCustomerTags`: Add tags to a customer.
     *   `customerId` (string): Customer ID.
     *   `tags` (array of strings): Tags to add.
 
 ### Order Management
 
-7.  `get-orders`: Get orders with advanced filtering/sorting.
+7.  `findOrders`: Get orders with advanced filtering/sorting.
     *   `first` (optional number): Limit orders.
     *   `after` (optional string): Next page cursor.
     *   `query` (optional string): Filter query.
     *   `sortKey` (optional enum): Sort field.
     *   `reverse` (optional boolean): Reverse sort.
-8.  `get-order`: Get a single order by ID.
+8.  `getOrderById`: Get a single order by ID.
     *   `orderId` (string): Order ID.
-9.  `create-draft-order`: Create a draft order.
+9.  `createDraftOrder`: Create a draft order.
     *   `lineItems` (array): Items (variantId, quantity).
     *   `email` (string): Customer email.
     *   `shippingAddress` (object): Shipping details.
     *   `note` (optional string): Order note.
-10. `complete-draft-order`: Complete a draft order.
+10. `completeDraftOrder`: Complete a draft order.
     *   `draftOrderId` (string): Draft order ID.
     *   `variantId` (string): Variant ID.
 
 ### Discount Management
 
-11. `create-discount`: Create a basic discount code.
+11. `createDiscountCode`: Create a basic discount code.
     *   `title` (string): Discount title.
     *   `code` (string): Discount code.
     *   `valueType` (enum): 'percentage' or 'fixed_amount'.
@@ -106,18 +106,18 @@ npm run build
 
 ### Collection Management
 
-12. `get-collections`: Get all collections.
+12. `listCollections`: Get all collections.
     *   `limit` (optional number, default: 10): Max collections.
     *   `name` (optional string): Filter by name.
 
 ### Shop Information
 
-13. `get-shop`: Get basic shop details (No inputs).
-14. `get-shop-details`: Get extended shop details (No inputs).
+13. `getShopDetails`: Get basic shop details (No inputs).
+14. `getExtendedShopDetails`: Get extended shop details (No inputs).
 
 ### Webhook Management
 
-15. `manage-webhook`: Manage webhooks.
+15. `manageWebhooks`: Manage webhooks.
     *   `action` (enum): 'subscribe', 'find', 'unsubscribe'.
     *   `callbackUrl` (string): Webhook URL.
     *   `topic` (enum): Webhook topic.
@@ -125,7 +125,7 @@ npm run build
 
 ### Debugging Tools
 
-16. `debug-get-variant-metafield`: Get variant & `size_chart_json` metafield.
+16. `debugGetVariantMetafield`: Get variant & `size_chart_json` metafield.
     *   `variantId` (string): Variant GID.
 
 ### Developer Tools
